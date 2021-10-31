@@ -1,0 +1,6 @@
+version https://git-lfs.github.com/spec/v1
+oid sha256:8db79b2dbea98bf646df1f0c1d1cd9bd38a2d844e7f2be91eb4407c689f6e6cb
+size 46# Uncomment the next line to define a global platform for your project
+Podfile.lock
+Pods/
+

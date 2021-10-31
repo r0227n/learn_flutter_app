@@ -1,0 +1,23 @@
+PODS:
+  - Flutter (1.0.0)
+  - OpenCV (4.3.0)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - OpenCV
+
+SPEC REPOS:
+  trunk:
+    - OpenCV
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  OpenCV: 681e0451c1e54c5930a8922277f817ed5d5ab459
+
+PODFILE CHECKSUM: 182738f09efbb07eae7a51c615ecce27e9a672b8
+
+COCOAPODS: 1.10.1
