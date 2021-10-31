@@ -34,8 +34,6 @@ import Flutter
               // Data -> String(Base64)
               let base64 = jpegData!.base64EncodedString()
               result(base64)
-
-//              result(base64 + "," + code + "," + angle)
           }
       )
     GeneratedPluginRegistrant.register(with: self)
