@@ -1,6 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tzData;
 
-void main() {
+class LocalNoticeService {
+  final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  Future<void> setup() async {
+    // #1
+    const androidSetting = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const iosSetting = DarwinInitializationSettings();
+
+    // #2
+    const initSettings = InitializationSettings(android: androidSetting, iOS: iosSetting);
+
+    // #3
+    await _localNotificationsPlugin.initialize(initSettings).then((_) {
+      debugPrint('aldkjflkasjdflkdsa');
+      debugPrint('setupPlugin: setup success');
+    }).catchError((Object error) {
+      debugPrint('///////////////');
+      debugPrint('Error: $error');
+    });
+  }
+
+  Future<void> addNotification(String title, String body, int endTime, int id,
+      {required String channel}) async {
+    tzData.initializeTimeZones();
+    final scheduleTime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, endTime);
+
+    final androidDetail = AndroidNotificationDetails(
+      channel, // channel Id
+      channel, // channel Name
+    );
+
+    const iosDetail = DarwinNotificationDetails();
+
+    final noticeDetail = NotificationDetails(
+      iOS: iosDetail,
+      android: androidDetail,
+    );
+
+    await _localNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      scheduleTime,
+      noticeDetail,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true,
+    );
+  }
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalNoticeService().setup();
+
   runApp(const MyApp());
 }
 
@@ -50,7 +106,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  void _incrementCounter() async {
+    await LocalNoticeService().addNotification(
+      'Notification Title',
+      'Notification Body',
+      DateTime.now().millisecondsSinceEpoch + 1000,
+      _counter,
+      channel: 'testing',
+    );
+
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
