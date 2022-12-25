@@ -7,19 +7,14 @@ class LocalNoticeService {
   final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   Future<void> setup() async {
-    // #1
     const androidSetting = AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosSetting = DarwinInitializationSettings();
 
-    // #2
     const initSettings = InitializationSettings(android: androidSetting, iOS: iosSetting);
 
-    // #3
     await _localNotificationsPlugin.initialize(initSettings).then((_) {
-      debugPrint('aldkjflkasjdflkdsa');
       debugPrint('setupPlugin: setup success');
     }).catchError((Object error) {
-      debugPrint('///////////////');
       debugPrint('Error: $error');
     });
   }
@@ -63,7 +58,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
