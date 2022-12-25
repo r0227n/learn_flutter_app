@@ -88,7 +88,7 @@ class KeyboardMods extends StatefulWidget {
   const KeyboardMods({
     required this.mods,
     required this.child,
-    this.height = 60.0,
+    this.height = 50.0,
     this.width,
     super.key,
   });
@@ -102,6 +102,7 @@ class KeyboardMods extends StatefulWidget {
   final Widget child;
 
   /// Height of widget displayed above keyboard
+  /// default value is 50.0
   final double height;
 
   /// Width of widget displayed above keyboard
@@ -140,28 +141,26 @@ class _KeyboardModsState extends State<KeyboardMods> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Focus(
-        focusNode: _node,
-        child: Stack(
-          children: <Widget>[
-            widget.child,
-            Visibility(
-              visible: _visible,
-              child: Positioned(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: widget.height,
-                    child: Row(
-                      children: widget.mods,
-                    ),
-                  ),
+      child: Stack(
+        children: <Widget>[
+          Focus(
+            focusNode: _node,
+            child: widget.child,
+          ),
+          Visibility(
+            visible: _visible,
+            child: Positioned(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              child: SizedBox(
+                height: widget.height,
+                width: widget.width,
+                child: Row(
+                  children: widget.mods,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
