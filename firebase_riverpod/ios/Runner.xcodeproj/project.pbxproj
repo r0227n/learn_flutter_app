@@ -3,7 +3,8 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;itialize project file)
+
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
